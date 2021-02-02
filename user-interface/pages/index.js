@@ -1,65 +1,57 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { useState } from "react";
+import Layout from "../components/Layout";
+import styles from "../styles/Home.module.scss";
+import Card from "../components/Card";
 
 export default function Home() {
+  const [urls, setUrls] = useState("");
+  const [results, setResults] = useState([]);
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Layout>
+      <p>Instructions</p>
+      <ol>
+        <li>Input any URL to view its raw HTML as a string.</li>
+        <li>Separate URLs with a comma.</li>
+        <li>Click the submit button to view results.</li>
+      </ol>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+          fetch("/api/scrape", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ urls }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              setResults(data);
+              setUrls("");
+            });
+        }}
+      >
+        <label htmlFor="url">
+          URL:
+          <input
+            type="text"
+            name="url"
+            value={urls}
+            onChange={(event) => setUrls(event.target.value)}
+            className={styles.urlInput}
+          />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+      <ul>
+        {results.map((result) => (
+          <li key={result.url}>
+            <Card url={result.url} html={result.html} />
+          </li>
+        ))}
+      </ul>
+    </Layout>
+  );
 }

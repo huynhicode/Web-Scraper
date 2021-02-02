@@ -1,0 +1,45 @@
+.main {
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  text-align: center;
+  background-color: grey;
+  padding: 15px;
+}
+
+.spacer {
+  flex-grow: 10;
+}
+
+.header {
+  padding: 20px;
+  text-align: center; 
+  background-color: azure;
+  font-weight: bold;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1)
+}
+
+.card {
+  width: 900px;
+  
+}
+
+.html {
+  height: 100px;
+  overflow: scroll;
+}
+
+.urlInput {
+  width: 500px;
+  height: 30px
+}
