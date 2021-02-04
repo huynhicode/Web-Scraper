@@ -1,4 +1,4 @@
-# IDIQ Coding Challenge
+# Web Scraper Coding Challenge
 
 This coding challenge is broken up into three parts. Outlined below for each part are:
 
