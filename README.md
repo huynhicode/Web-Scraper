@@ -1,10 +1,10 @@
 # IDIQ Coding Challenge
 
-This coding challenge is broken into three parts. Outlined below for each part are:
+This coding challenge is broken up into three parts. Outlined below for each part are:
 
-- Spec instructions for each part.
-- Instructions on how to run each spec
-- Screenshots of expected spec outcome(s)
+- Spec instructions.
+- Instructions on how to run each spec.
+- Screenshots of expected spec outcome(s).
 ---
 
 **Part 1 Spec:**
@@ -43,7 +43,7 @@ Convert your script into a rest API that can be passed a url and return the home
 1. Set the value to: whatever url you would like to scrape (i.e. https://www.nasa.gov)
 1. Click on the "send" button
 Example:
-![postman-example-nasa]("screenshots/postman-nasa.png")
+![postman-example-nasa](screenshots/postman-nasa.png)
 
 ---
 
@@ -57,4 +57,30 @@ We should be able to tell which url corresponds with which html string.
 
 **Instructions on how to run the Part 3 spec:**
 
-``
+1. cd into the `user-interface` directory.
+2. Run `yarn dev`.
+3. View the UI in your browser - localhost:3000.
+4. Input any URL (separate URLs with a comma), click on the "submit" button to view the raw HTML of each URL.
+
+![before search](screenshots/part-3-beforeSearch.png)
+
+![after search](screenshots/part-3-afterSearch.png)
+---
+
+**Technologies Used**:
+
+- React.js
+- Next.js
+- SASS
+- Axios
+- Express
+
+**Future Development**:
+
+- Add unit and integration tests
+- Add Postman tests
+- Implement copy to clipboard functionality
+- Implement download file functionality
+- Append results
+- Clear results
+

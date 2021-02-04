@@ -6,49 +6,57 @@ import Card from "../components/Card";
 export default function Home() {
   const [urls, setUrls] = useState("");
   const [results, setResults] = useState([]);
+  const [error, setError] = useState("");
 
   return (
     <Layout>
-      <p>Instructions</p>
-      <ol>
-        <li>Input any URL to view its raw HTML as a string.</li>
-        <li>Separate URLs with a comma.</li>
-        <li>Click the submit button to view results.</li>
-      </ol>
       <form
-        onSubmit={(event) => {
+        onSubmit={async (event) => {
           event.preventDefault();
 
-          fetch("/api/scrape", {
+          const response = await fetch("/api/scrape", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ urls }),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(data);
-              setResults(data);
-              setUrls("");
-            });
+          });
+
+          if (response.ok === false) {
+            setError("Error: please check that you have a valid URL.");
+            return;
+          }
+          const data = await response.json();
+
+          setResults(data);
+          setUrls("");
         }}
       >
         <label htmlFor="url">
-          URL:
+          <div className={styles.instructions}>
+            {" "}
+            Input URL to view raw HTML. Separate URLs with a comma.
+          </div>
+
           <input
             type="text"
             name="url"
             value={urls}
             onChange={(event) => setUrls(event.target.value)}
             className={styles.urlInput}
+            placeholder="www.google.com, www.nasa.gov"
           />
         </label>
-        <input type="submit" value="Submit" />
+
+        <div>
+          <input type="submit" value="Submit" className={styles.submitButton} />
+        </div>
+
+        <div className={styles.error}>{error}</div>
       </form>
 
-      <ul>
+      <ul className={styles.cardList}>
         {results.map((result) => (
           <li key={result.url}>
-            <Card url={result.url} html={result.html} />
+            <Card url={result.url} html={result.html} error={result.error} />
           </li>
         ))}
       </ul>
