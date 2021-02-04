@@ -1,4 +1,4 @@
-# Web Scraper Coding Challenge
+## Web Scraper 
 
 This coding challenge is broken up into three parts. Outlined below for each part are:
 
@@ -66,6 +66,13 @@ We should be able to tell which url corresponds with which html string.
 
 ![after search](screenshots/part-3-afterSearch.png)
 ---
+
+**Figma Wireframe**
+
+![Figma Wireframe](screenshots/part-3-wireframe.png)
+
+[Figma Wireframe](https://www.figma.com/file/WzDbt7LTLYuoPKoqlbYPlH/Web-Scraper?node-id=0%3A1)
+
 
 **Technologies Used**:
 
