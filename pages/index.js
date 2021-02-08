@@ -1,9 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
-import styles from "../styles/Home.module.scss";
 import Card from "../components/Card";
+import styles from "../styles/Home.module.scss";
 
-export default function Home() {
+function Home() {
   const [urls, setUrls] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState("");
@@ -25,14 +25,12 @@ export default function Home() {
             return;
           }
           const data = await response.json();
-
           setResults(data);
           setUrls("");
         }}
       >
         <label htmlFor="url">
           <div className={styles.instructions}>
-            {" "}
             Input URL to view raw HTML. Separate URLs with a comma.
           </div>
 
@@ -63,3 +61,5 @@ export default function Home() {
     </Layout>
   );
 }
+
+export default Home;

@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "../styles/Home.module.scss";
 
-const Header = () => <header className={styles.header}>URL Scraper</header>;
+function Header() {
+  return <h1 className={styles.header}>URL Scraper</h1>;
+}
 
 export default Header;
