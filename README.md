@@ -83,7 +83,7 @@ We should be able to tell which url corresponds with which html string.
 
 [Figma Wireframe](https://www.figma.com/file/WzDbt7LTLYuoPKoqlbYPlH/Web-Scraper?node-id=0%3A1)
 
-
+---
 
 **Technologies Used**:
 
@@ -99,6 +99,3 @@ We should be able to tell which url corresponds with which html string.
 - Add Postman tests
 - Implement copy to clipboard functionality
 - Implement download file functionality
-- Append results
-- Clear results
-
