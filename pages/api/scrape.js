@@ -1,11 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import axios from "axios";
 
-async function scrape(req, res) {
+function scrape(req, res) {
   if (req.method === "POST") {
     const { urls } = req.body;
 
-    const urlArray = urls.split(",").map((rawUrl) => {
+    const cleanedUrls = urls.split(",").map((rawUrl) => {
       const url = rawUrl.trim();
       if (url.startsWith("http")) {
         return url;
@@ -13,14 +13,18 @@ async function scrape(req, res) {
       return "https://".concat(url);
     });
 
-    const results = await Promise.allSettled(urlArray.map((url) => axios(url)));
+    const promiseArray = cleanedUrls.map((url) => axios(url));
 
-    const formattedResponse = results.map((response, index) => ({
-      url: urlArray[index],
-      html: response.value?.data,
-      error: response.reason?.message,
-    }));
-    res.status(200).json(formattedResponse);
+    const combinedPromise = Promise.allSettled(promiseArray);
+
+    combinedPromise.then((allResults) => {
+      const formattedResponse = allResults.map((result, index) => ({
+        url: cleanedUrls[index],
+        html: result.value?.data,
+        error: result.reason?.message,
+      }));
+      res.status(200).json(formattedResponse);
+    });
   }
 }
 

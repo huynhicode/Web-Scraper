@@ -25,6 +25,7 @@ function Home() {
             return;
           }
           const data = await response.json();
+
           setResults(data);
           setUrls("");
         }}
