@@ -6,7 +6,8 @@ Convert your script into a rest API that can be passed a url and return the home
 
 **Instructions on how to run the Part 2 spec:**
 
-1. Run `yarn start`.
+1. Run `yarn` to install dependencies.
+1. Run `yarn start` to run the API server.
 1. Open the Postman application: https://www.postman.com/
 1. Create a new post request in Postman
 1. Set the URL to: http://localhost:5000/api/scrape
