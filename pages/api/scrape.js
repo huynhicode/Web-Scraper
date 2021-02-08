@@ -3,7 +3,7 @@ import axios from "axios";
 
 function scrape(req, res) {
   if (req.method === "POST") {
-    const { urls } = req.body;
+    const urls = req.body;
 
     const cleanedUrls = urls.split(",").map((rawUrl) => {
       const url = rawUrl.trim();
@@ -23,7 +23,7 @@ function scrape(req, res) {
         html: result.value?.data,
         error: result.reason?.message,
       }));
-      res.status(200).json(formattedResponse);
+      res.json(formattedResponse);
     });
   }
 }

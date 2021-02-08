@@ -4,9 +4,8 @@ import Card from "../components/Card";
 import styles from "../styles/Home.module.scss";
 
 function Home() {
-  const [urls, setUrls] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [results, setResults] = useState([]);
-  const [error, setError] = useState("");
 
   return (
     <Layout>
@@ -14,42 +13,41 @@ function Home() {
         onSubmit={async (event) => {
           event.preventDefault();
 
-          const response = await fetch("/api/scrape", {
+          const rawResponse = await fetch("/api/scrape", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ urls }),
+            headers: { "Content-Type": "text/plain" },
+            body: inputValue,
           });
 
-          if (response.ok === false) {
-            setError("Error: please check that you have a valid URL.");
-            return;
-          }
-          const data = await response.json();
+          const urlData = await rawResponse.json();
 
-          setResults(data);
-          setUrls("");
+          setResults(urlData);
+          setInputValue("");
         }}
       >
         <label htmlFor="url">
           <div className={styles.instructions}>
-            Input URL to view raw HTML. Separate URLs with a comma.
+            Input URL(s) to view raw HTML. Separate URLs with a comma.
           </div>
 
           <input
             type="text"
             name="url"
-            value={urls}
-            onChange={(event) => setUrls(event.target.value)}
+            value={inputValue}
+            onChange={(event) => setInputValue(event.target.value)}
             className={styles.urlInput}
             placeholder="www.google.com, www.nasa.gov"
           />
         </label>
 
         <div>
-          <input type="submit" value="Submit" className={styles.submitButton} />
+          <input
+            type="submit"
+            value="Submit"
+            disabled={inputValue === ""}
+            className={styles.submitButton}
+          />
         </div>
-
-        <div className={styles.error}>{error}</div>
       </form>
 
       <ul className={styles.cardList}>

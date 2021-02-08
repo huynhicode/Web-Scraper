@@ -76,6 +76,10 @@
   max-width: 100vw;
 }
 
+.urlInput::placeholder {
+  color: #bbb;
+}
+
 .submitButton {
   background-color: rgba(0, 0, 0, 0.75);
   color: white;
@@ -91,6 +95,12 @@
 
 .submitButton:hover {
   background-color: rgba(0, 0, 0, 0.85);
+}
+
+.submitButton:disabled, .submitButton:disabled:hover {
+  cursor: initial;
+  background-color: darkgray;
+  border: 1px solid darkgrey
 }
 
 .instructions {
