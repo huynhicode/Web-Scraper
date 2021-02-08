@@ -1,17 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import axios from "axios";
 
-export default async (req, res) => {
+async function scrape(req, res) {
   if (req.method === "POST") {
     const { urls } = req.body;
+
     const urlArray = urls.split(",").map((rawUrl) => {
       const url = rawUrl.trim();
-      if (
-        url[0] === "h" &&
-        url[1] === "t" &&
-        url[2] === "t" &&
-        url[3] === "p"
-      ) {
+      if (url.startsWith("http")) {
         return url;
       }
       return "https://".concat(url);
@@ -26,4 +22,6 @@ export default async (req, res) => {
     }));
     res.status(200).json(formattedResponse);
   }
-};
+}
+
+export default scrape;
