@@ -21,7 +21,7 @@ Instructions on how to run the Part 1 spec:
 
 1. Run `git checkout Part-1` to checkout out the Part-1 branch.
 1. Run `yarn` to install dependencies.
-1. Run `yarn start` to execute the web scraper script.
+1. Run `yarn scrape` to execute the web scraper script.
 1. Observe that a `scraped-html` folder is created with html files for the following websites:
 - https://www.dmv.ca.gov - `dmv.html`
 - https://www.google.com - `google.html`
